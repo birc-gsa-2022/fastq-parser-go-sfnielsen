@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 )
@@ -18,5 +19,17 @@ func main() {
 	}
 	defer f.Close()
 
-	fmt.Println("I should be processing the input file now!")
+	//####################################
+
+	fileScanner := bufio.NewScanner(f)
+
+	output := ""
+	for fileScanner.Scan() {
+		line := fileScanner.Text()
+		if line[0:1] == "@" {
+			output = output + line[1:] + "\n"
+		}
+	}
+	fmt.Print(output)
+	//####################################
 }
